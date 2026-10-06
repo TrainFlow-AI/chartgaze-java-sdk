@@ -72,6 +72,22 @@ public final class ChartGazeClient {
     return callTool("get_market_context", args);
   }
 
+  public JsonNode compareMarkets(java.util.List<String> symbols)
+      throws IOException, InterruptedException {
+    Map<String, Object> args = new LinkedHashMap<>();
+    args.put("symbols", symbols);
+    return callTool("compare_markets", args);
+  }
+
+  public JsonNode getMarketNews(String symbol, int limit, int hoursBack)
+      throws IOException, InterruptedException {
+    Map<String, Object> args = new LinkedHashMap<>();
+    args.put("symbol", symbol);
+    args.put("limit", limit);
+    args.put("hours_back", hoursBack);
+    return callTool("get_market_news", args);
+  }
+
   public JsonNode getHistoricalContext(String symbol, String isoTimestamp)
       throws IOException, InterruptedException {
     Map<String, Object> args = new LinkedHashMap<>();
@@ -86,6 +102,47 @@ public final class ChartGazeClient {
 
   public JsonNode getTradingAccounts() throws IOException, InterruptedException {
     return callTool("get_trading_accounts", Map.of());
+  }
+
+  /**
+   * Queue a trade for dashboard/email approval (requires Review or Live mode).
+   * {@code accountId} is required. Size = lots (forex/cTrader/MetaAPI) or base amount (CCXT).
+   */
+  public JsonNode proposeTrade(
+      String accountId,
+      String symbol,
+      String side,
+      double volume,
+      Double stopLoss,
+      Double takeProfit)
+      throws IOException, InterruptedException {
+    Map<String, Object> args = new LinkedHashMap<>();
+    args.put("account_id", accountId);
+    args.put("symbol", symbol);
+    args.put("side", side);
+    args.put("volume", volume);
+    if (stopLoss != null) args.put("stop_loss", stopLoss);
+    if (takeProfit != null) args.put("take_profit", takeProfit);
+    return callTool("propose_trade", args);
+  }
+
+  /** Immediate place — only when user set Dashboard → Your AIs → Live. */
+  public JsonNode executeTrade(
+      String accountId,
+      String symbol,
+      String side,
+      double volume,
+      Double stopLoss,
+      Double takeProfit)
+      throws IOException, InterruptedException {
+    Map<String, Object> args = new LinkedHashMap<>();
+    args.put("account_id", accountId);
+    args.put("symbol", symbol);
+    args.put("side", side);
+    args.put("volume", volume);
+    if (stopLoss != null) args.put("stop_loss", stopLoss);
+    if (takeProfit != null) args.put("take_profit", takeProfit);
+    return callTool("execute_trade", args);
   }
 
   public JsonNode getUsageSummary() throws IOException, InterruptedException {
