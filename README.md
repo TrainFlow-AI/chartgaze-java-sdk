@@ -11,7 +11,8 @@
 | Product | ChartGaze by TrainFlow AI |
 | Site | https://chartgaze.live |
 | Docs | https://www.chartgaze.live/docs |
-| MCP | https://api.chartgaze.live |
+| MCP connector URL | https://api.chartgaze.live/mcp |
+| API / SDK base | https://api.chartgaze.live |
 | Org | https://github.com/TrainFlow-AI |
 | Autonomous trading | https://www.trainflow.dev |
 | License | MIT |
@@ -34,7 +35,7 @@ ChartGaze = **eyes** for your AI. For **hands** (autonomous execution), go to **
 - **Account-aware services** — list connected MT4 / MT5 / cTrader / crypto accounts
 - **Hand-off to TrainFlow** — prototype with ChartGaze, run autonomy on TrainFlow
 
-For chat UIs prefer remote MCP (`https://api.chartgaze.live`) — no Java required.
+For chat UIs prefer remote MCP (`https://api.chartgaze.live/mcp`) — no Java required.
 
 ---
 
@@ -242,7 +243,7 @@ For full autonomous desks use **[TrainFlow](https://www.trainflow.dev)**.
 
 ## MCP for Claude / ChatGPT
 
-No Java needed — paste `https://api.chartgaze.live` as a custom connector, or use [chartgaze.live/agents](https://www.chartgaze.live/agents) (Boardy-style “Open in Claude / ChatGPT” buttons).
+No Java needed — paste `https://api.chartgaze.live/mcp` as a custom connector, or use [chartgaze.live/agents](https://www.chartgaze.live/agents) (Boardy-style “Open in Claude / ChatGPT / Grok” buttons).
 
 ---
 
